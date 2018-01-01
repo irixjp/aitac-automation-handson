@@ -1,0 +1,23 @@
+- hosts: all
+  gather_facts: False
+  connection: local
+  tasks:
+  - name: "View ec2 instans list"
+    shell: |
+      aws ec2 describe-instances --query \
+      'Reservations[].Instances[].{PublicIp:PublicIpAddress,PrivateIp:PrivateIpAddress,InstanceId:InstanceId,Name:Tags[?Key==`automation_group`].Value}'
+    register: result
+
+  - debug: var=result.stdout_lines
+    when: result | success
+    tags:
+      - always
+      
+  - name: gathering ec2 facts
+    ec2_instance_facts:
+    register: result
+
+  - debug: var=result
+    when: result | success
+    tags:
+      - always
