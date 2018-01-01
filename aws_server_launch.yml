@@ -1,0 +1,35 @@
+- hosts: all
+  gather_facts: False
+  connection: local
+  vars:
+    image: "{{ extra_image }}"
+    key: "{{ extra_key | default('aitac-automation-key') }}"
+    secg: "{{ extra_secg | default('aitac-automation-sg') }}"
+    count: "{{ extra_count | default('2') }}"
+    vpc_id: "{{ extra_vpc_id }}"
+    region: "{{ extra_region | default('ap-northeast-1') }}"
+
+  tasks:
+    - ec2:
+        key_name: "{{ key }}"
+        instance_type: t2.micro
+        image: "{{ image }}"
+        wait: yes
+        group: "{{ secg }}"
+        count: 2
+        vpc_subnet_id: "{{ vpc_id }}"
+        assign_public_ip: yes
+        region: "{{ region }}"
+        instance_tags:
+          Name: ansible-target
+          automation_group: target
+        volumes:
+          - device_name: /dev/sda1
+            volume_type: gp2
+            volume_size: 10
+            delete_on_termination: true
+
+    - ec2_instance_facts:
+      register: result
+
+    - debug: var=result

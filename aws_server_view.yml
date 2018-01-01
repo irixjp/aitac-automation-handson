@@ -2,8 +2,7 @@
   gather_facts: False
   connection: local
   tasks:
-  - name: "View ec2 instans list"
-    shell: |
+  - shell: |
       aws ec2 describe-instances --query \
       'Reservations[].Instances[].{PublicIp:PublicIpAddress,PrivateIp:PrivateIpAddress,InstanceId:InstanceId,Name:Tags[?Key==`automation_group`].Value}'
     register: result
@@ -13,8 +12,7 @@
     tags:
       - always
       
-  - name: gathering ec2 facts
-    ec2_instance_facts:
+  - ec2_instance_facts:
     register: result
 
   - debug: var=result

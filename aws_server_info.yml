@@ -1,0 +1,17 @@
+- hosts: all
+  gather_facts: False
+  connection: local
+
+  tasks:
+    - ec2_instance_facts:
+      register: result
+
+    - set_fact:
+        ans_mngr_info: "{{ rt[0] }}"
+      vars:
+        query: "[?tags.automation_group=='manager']"
+        rt: "{{ result.instances | json_query(query) }}"
+
+    - debug: var=ans_mngr_info.subnet_id
+
+    - debug: var=ans_mngr_info.image_id
