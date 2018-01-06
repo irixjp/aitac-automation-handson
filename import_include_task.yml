@@ -1,0 +1,1 @@
+- debug: msg="MSG from a task file {{ myval | default('Empty') }}"

@@ -1,0 +1,4 @@
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - debug: msg="MSG from a playbook file {{ myval | default('Empty') }}"

@@ -1,0 +1,14 @@
+- hosts: localhost
+  gather_facts: True
+  vars:
+    foo1: 1
+    bar1: 2
+
+  tasks:
+    - shell: hostname
+
+    - shell: date
+
+    - shell: echo {{ foo1 }}
+    
+    - shell: echo {{ bar1 }}

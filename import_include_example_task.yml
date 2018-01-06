@@ -1,0 +1,36 @@
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - import_tasks: import_include_task.yml
+
+    - import_tasks: import_include_task.yml
+      vars:
+        myval: 3
+
+    - import_tasks: import_include_task.yml
+      vars:
+        myval: 4
+
+
+
+    - include_tasks: import_include_task.yml
+
+    - include_tasks: import_include_task.yml
+      vars:
+        myval: 5
+
+    - include_tasks: import_include_task.yml
+      vars:
+        myval: 6
+
+    - include_tasks: "{{ item.file }}"
+      vars:
+        myval: "{{ item.val }}"
+      with_items:
+        - file: import_include_task.yml
+          val: 7
+        - file: import_include_task.yml
+          val: 8
+        - file: import_include_task.yml
+          val: 9
+

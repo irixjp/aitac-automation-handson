@@ -1,0 +1,9 @@
+- import_playbook: import_include_playbook.yml
+
+- import_playbook: import_include_playbook.yml
+  vars:
+    myval: 1
+
+- import_playbook: import_include_playbook.yml
+  vars:
+    myval: 2
