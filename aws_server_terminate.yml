@@ -1,0 +1,32 @@
+- hosts: all
+  gather_facts: False
+  connection: local
+
+  tasks:
+    - shell: ./inventories/ec2.py --list
+      register: result
+
+    - set_fact:
+        param: "{{ ret._meta.hostvars }}"
+      vars:
+        ret: "{{ result.stdout | from_json }}"
+
+    - debug: var=param
+
+    - set_fact:
+        ret: "{{ param | json_query(string) }}"
+      vars:
+        string: "*.{ automation_group: ec2_tag_automation_group, ec2_id: ec2_id }"
+
+    - debug: var=ret
+
+    - set_fact:
+        target_ids: "{{ ret | json_query(string) }}"
+      vars:
+        string: "[?automation_group=='target'].ec2_id"
+
+    - debug: var=target_id
+
+    - ec2:
+        state: 'absent'
+        instance_ids: '{{ target_ids }}'
