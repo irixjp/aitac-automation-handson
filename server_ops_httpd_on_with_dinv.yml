@@ -1,0 +1,17 @@
+- hosts: tag_automation_group_target
+  gather_facts: True
+  become: yes
+
+  tasks:
+    - yum:
+        name: httpd
+        state: latest
+
+    - systemd:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
