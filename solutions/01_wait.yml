@@ -1,0 +1,15 @@
+- hosts: tag_automation_group_target
+  gather_facts: False
+  become: yes
+
+  tasks:
+    - name: TEST SSH port is up?
+      wait_for:
+        host: "{{ (ansible_ssh_host | default(ansible_host)) | default(inventory_hostname) }}"
+        port: 22
+        delay: 10
+        state: drained
+        timeout: 600
+      connection: local
+
+    - ping:

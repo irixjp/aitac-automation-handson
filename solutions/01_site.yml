@@ -1,0 +1,7 @@
+---
+#- import_playbook: ../aws_server_launch.yml
+#  vars:
+#    image: ami-4dd5522b
+#    vpc_id: subnet-caea7083
+
+- import_playbook: ./01_wait.yml

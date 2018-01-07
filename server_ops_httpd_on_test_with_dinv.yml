@@ -1,0 +1,54 @@
+- hosts: tag_automation_group_target
+  gather_facts: True
+  become: yes
+
+  tasks:
+    - name: TEST httpd packages are exist?
+      shell:
+        rpm -qa |grep http[d]
+      register: result
+
+    - assert:
+        that:
+          - "{{ result | succeeded }}"
+
+    - name: TEST httpd process are exist?
+      shell:
+        ps -ef |grep http[d]
+      register: result
+
+    - assert:
+        that:
+          - "{{ result | succeeded }}"
+
+    - name: TEST HTTP port is up?
+      wait_for:
+        host: "{{ (ansible_ssh_host | default(ansible_host)) | default(inventory_hostname) }}"
+        port: 80
+        delay: 1
+        state: drained
+      connection: local
+
+    - name: TEST index.html is exist?
+      shell: |
+        test -f /var/www/html/index.html
+
+    - assert:
+        that:
+          - "{{ result | succeeded }}"
+
+    - name: TEST anyone can access & get contents?
+      uri:
+        url: http://{{ inventory_hostname }}/
+        validate_certs: no
+        timeout: 5
+        return_content: yes
+      register: webpages
+      connection: local
+
+    - name: TEST contents have specific strings?
+      assert:
+        that:
+          - (webpages.content | search(query))
+      vars:
+        query: "This page is on"
