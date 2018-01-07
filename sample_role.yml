@@ -1,0 +1,9 @@
+- hosts: localhost
+  gather_facts: False
+  roles:
+    - sample_ping
+  tasks:
+    - import_role:
+        name: sample_ping
+      vars:
+        sample_ping_val1: 2000

@@ -1,0 +1,5 @@
+---
+# tasks file for sample_ping
+- ping:
+
+- debug: var=sample_ping_val1
