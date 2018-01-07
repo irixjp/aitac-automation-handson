@@ -1,2 +1,15 @@
 ---
 # tasks file for roles/httpd_on
+
+- yum:
+    name: httpd
+    state: latest
+
+- systemd:
+    name: httpd
+    state: started
+    enabled: yes
+
+- template:
+    src: index.html.j2
+    dest: /var/www/html/index.html

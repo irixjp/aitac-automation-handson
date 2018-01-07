@@ -1,2 +1,11 @@
 ---
 # defaults file for roles/ec2_instance_create
+
+ec2_instance_create_image: ami-4dd5522b
+ec2_instance_create_vpc_id: subnet-caea7083
+ec2_instance_create_key: aitac-automation-key
+ec2_instance_create_secg: aitac-automation-sg
+ec2_instance_create_region: ap-northeast-1
+ec2_instance_create_automation_group_name: target
+ec2_instance_create_count: 2
+ec2_instance_create_inv_group_name: tag_automation_group_target

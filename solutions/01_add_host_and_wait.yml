@@ -19,7 +19,7 @@
       wait_for:
         host: "{{ (ansible_ssh_host | default(ansible_host)) | default(inventory_hostname) }}"
         port: 22
-        delay: 180
+        delay: 60
         state: started
         timeout: 600
       connection: local

@@ -25,7 +25,7 @@
           automation_group: target
         volumes:
           - device_name: /dev/sda1
-            volume_type: gp2
+            volume_type: standard
             volume_size: 10
             delete_on_termination: true
       register: ec2
