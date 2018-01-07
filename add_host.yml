@@ -1,0 +1,32 @@
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - add_host:
+        host: 127.0.0.1
+        group: inv01
+
+    - add_host:
+        host: 127.0.0.1
+        group: inv02
+
+    - add_host:
+        host: 127.0.0.1
+        group: inv03
+
+- hosts: inv01
+  gather_facts: False
+  connection: local
+  roles:
+    - sample_ping
+
+- hosts: inv02
+  gather_facts: False
+  connection: local
+  roles:
+    - sample_ping
+
+- hosts: inv03
+  gather_facts: False
+  connection: local
+  roles:
+    - sample_ping

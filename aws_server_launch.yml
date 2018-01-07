@@ -28,8 +28,6 @@
             volume_type: gp2
             volume_size: 10
             delete_on_termination: true
+      register: ec2
 
-    - ec2_instance_facts:
-      register: result
-
-    - debug: var=result
+    - debug: var=ec2
