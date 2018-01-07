@@ -1,0 +1,20 @@
+- name: Launch instances on EC2
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  roles:
+    - ec2_instance_create
+
+- hosts: tag_automation_group_target
+  gather_facts: False
+  roles:
+    - wait_server_boot
+
+- hosts: tag_automation_group_target
+  gather_facts: True
+  become: yes
+  roles:
+    - httpd_on
+    - httpd_on_test
+    - nginx_lb
+    - nginx_lb_test

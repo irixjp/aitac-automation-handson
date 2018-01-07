@@ -1,2 +1,18 @@
 ---
 # tasks file for roles/nginx_lb_test
+
+- shell: |
+    function get_contents () {
+      for i in `seq 1 10`
+      do
+        curl -s {{ inventory_hostname }}:8080 | grep "This page"
+      done
+    }
+    get_contents | sort | uniq | wc -l
+  register: result
+
+- debug: var=result
+
+- assert:
+    that:
+      - ((result.stdout | int) >= 2)

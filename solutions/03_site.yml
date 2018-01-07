@@ -1,0 +1,6 @@
+- hosts: tag_automation_group_target
+  gather_facts: True
+  become: yes
+  roles:
+    - nginx_lb
+    - nginx_lb_test
