@@ -2,13 +2,12 @@
 
 VERSION=aitac-2018-v01
 
-# add fast mirror info
-echo "include_only=.jp" >>  /etc/yum/pluginconf.d/fastestmirror.conf
-echo "prefer=ftp.iij.ad.jp" >> /etc/yum/pluginconf.d/fastestmirror.conf
+# add fast repo info
+rm -rf /etc/yum.repos.d/*
+curl -sL -o /etc/yum.repos.d/aitac-centos.repo https://raw.githubusercontent.com/irixjp/aitac-automation-handson/master/aitac-centos.repo
 
 # clear repo metadata
 yum clean all
-rm -rf /var/cache/yum
 yum repolist
 
 # install docker
@@ -18,7 +17,9 @@ yum install -y docker
 systemctl enable docker
 systemctl start docker
 
+# wait docker start
 sleep 10
+docker version
 
 # pull & run docker images
 docker run -d -p 8888:8888 --name jupyter \
