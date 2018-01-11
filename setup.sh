@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=aitac-2018-v01
+VERSION=latest
 
 # add fast repo info
 rm -rf /etc/yum.repos.d/*
@@ -22,11 +22,11 @@ sleep 10
 docker version
 
 # pull & run docker images
-docker run -d -p 8888:8888 --name jupyter \
-           -e TZ=JST-9 \
-           irixjp/aitac-automation:${VERSION:?}
+docker run -d -p 8888:8888 --name jupyter -e TZ=JST-9 irixjp/aitac-automation:${VERSION:?}
+sleep 10
 
-docker exec jupyter "git clone https://github.com/irixjp/aitac-automation-handson.git"
+# add handson contents into the container
+docker exec jupyter git clone https://github.com/irixjp/aitac-automation-handson.git
 
 echo ''
 echo ''
