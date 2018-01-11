@@ -6,6 +6,7 @@
       aws ec2 describe-instances --query \
       'Reservations[].Instances[].{PublicIp:PublicIpAddress,PrivateIp:PrivateIpAddress,InstanceId:InstanceId,Name:Tags[?Key==`automation_group`].Value}'
     register: result
+    changed_when: False
 
   - debug: var=result.stdout_lines
     when: result | success
