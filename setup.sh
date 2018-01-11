@@ -4,7 +4,7 @@ VERSION=latest
 
 # add fast repo info
 rm -rf /etc/yum.repos.d/*
-curl -sL -o /etc/yum.repos.d/aitac-centos.repo https://raw.githubusercontent.com/irixjp/aitac-automation-handson/master/aitac-centos.repo
+curl -sL -o /etc/yum.repos.d/aitac-centos.repo https://raw.githubusercontent.com/irixjp/aitac-automation-handson/master/roles/set_fast_repo/files/aitac-centos.repo
 
 # clear repo metadata
 yum clean all
