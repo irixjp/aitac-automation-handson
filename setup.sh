@@ -3,11 +3,13 @@
 VERSION=aitac-2018-v01
 
 # add fast mirror info
+echo "include_only=.jp" >>  /etc/yum/pluginconf.d/fastestmirror.conf
 echo "prefer=ftp.iij.ad.jp" >> /etc/yum/pluginconf.d/fastestmirror.conf
 
 # clear repo metadata
 yum clean all
 rm -rf /var/cache/yum
+yum repolist
 
 # install docker
 yum install -y docker
