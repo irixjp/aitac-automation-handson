@@ -10,6 +10,7 @@
     }
     get_contents | sort | uniq | wc -l
   register: result
+  changed_when: False
 
 - debug: var=result
 

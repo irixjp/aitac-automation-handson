@@ -4,7 +4,7 @@
 
   tasks:
     - import_role:
-        names: set_fast_repo
+        name: set_fast_repo
 
     - yum:
         name: httpd

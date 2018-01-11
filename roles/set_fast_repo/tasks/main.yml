@@ -4,6 +4,7 @@
 - shell: /bin/ls /etc/yum.repos.d/CentOS*
   register: path_files
   ignore_errors: True
+  changed_when: False
 
 - file:
     path: "{{ item }}"
