@@ -1,8 +1,0 @@
-- name: Launch instances on EC2
-  hosts: localhost
-  gather_facts: False
-  connection: local
-  roles:
-    - sample_ping
-  tasks:
-    - import_role: name=sample_ping
