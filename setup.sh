@@ -2,8 +2,12 @@
 
 VERSION=aitac-2018-v01
 
+# add fast mirror info
+echo "prefer=ftp.iij.ad.jp" >> /etc/yum/pluginconf.d/fastestmirror.conf
+
 # clear repo metadata
 yum clean all
+rm -rf /var/cache/yum
 
 # install docker
 yum install -y docker
@@ -12,12 +16,14 @@ yum install -y docker
 systemctl enable docker
 systemctl start docker
 
+sleep 10
+
 # pull & run docker images
 docker run -d -p 8888:8888 --name jupyter \
            -e TZ=JST-9 \
-           irixjp/aitac-automation:${aitac-2018-v01:?}
+           irixjp/aitac-automation:${VERSION:?}
 
-docker exec jupyter git clone https://github.com/irixjp/aitac-automation-handson.git
+docker exec jupyter "git clone https://github.com/irixjp/aitac-automation-handson.git"
 
 echo ''
 echo ''
