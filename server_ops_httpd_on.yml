@@ -3,6 +3,9 @@
   become: yes
 
   tasks:
+    - name: fast repo settings
+      include_tasks: ./fast_repo.yml
+
     - yum:
         name: httpd
         state: latest

@@ -1,0 +1,8 @@
+- file:
+    path: "{{ item }}"
+    state: absent
+  with_fileglob: /etc/yum.repos.d/CentOS*
+
+- copy:
+    src: aitac-centos.repo
+    dest: /etc/yum.repos.d/aitac-centos.repo
