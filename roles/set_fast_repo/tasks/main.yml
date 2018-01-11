@@ -1,0 +1,17 @@
+---
+# tasks file for set_repo
+
+- shell: /bin/ls /etc/yum.repos.d/CentOS*
+  register: path_files
+  ignore_errors: True
+
+- file:
+    path: "{{ item }}"
+    state: absent
+  with_items: "{{ path_files.stdout_lines }}"
+  when: path_files | succeeded
+
+- copy:
+    src: aitac-centos.repo
+    dest: /etc/yum.repos.d/aitac-centos.repo
+

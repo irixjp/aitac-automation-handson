@@ -14,6 +14,7 @@
   gather_facts: True
   become: yes
   roles:
+    - set_fast_repo
     - httpd_on
     - httpd_on_test
     - nginx_lb

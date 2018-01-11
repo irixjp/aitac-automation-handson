@@ -3,8 +3,8 @@
   become: yes
 
   tasks:
-    - name: fast repo settings
-      include_tasks: ./fast_repo.yml
+    - import_role:
+        names: set_fast_repo
 
     - yum:
         name: httpd

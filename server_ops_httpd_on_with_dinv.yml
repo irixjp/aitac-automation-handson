@@ -3,6 +3,9 @@
   become: yes
 
   tasks:
+    - import_role:
+        names: set_fast_repo
+
     - yum:
         name: httpd
         state: latest
