@@ -2,6 +2,8 @@
 ---
 本演習では、Ansible の基本となるインベントリー(inventory)と認証情報(credential)について学習します。これは Ansible を動かす上で最低限準備する3つの情報のうちの2つに該当します。
 
+![structure.png](./assets/01/structure.png)
+
 ## 演習環境での Ansible の実行
 ---
 まず以下のコマンドを実行してください。これは Ansible を使って3台の演習ノードのディスク使用量を確認しています。
