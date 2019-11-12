@@ -1,0 +1,11 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    tests: []
+  tasks:
+    - debug:
+        msg: |
+          aaa
+          bbb
+          ccc
+      loop: "{{ tests }}"
