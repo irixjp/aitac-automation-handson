@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+  jupyter:
+    image: irixjp/aitac-automation
+    ports:
+      - "8888:8888"
+    command: bash -c "git clone --depth 1 https://github.com/irixjp/aitac-automation-handson.git ; jupyter notebook --NotebookApp.token=''"
